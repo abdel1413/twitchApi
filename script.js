@@ -73,24 +73,36 @@ async function getTwitchUser(username) {
 
 streamers.forEach(streamer => {
     getTwitchUser(streamer).then(data => {
-    //console.log('stream',data);
     if(data.data.length > 0) {
-        const user = data.data[0]; 
-        console.log(`${streamer} user info:`); 
-        console.log(`user: ${user}`); 
-        const listItem = document.createElement('li');  
-        listItem.classList.add('streamer-item');
-        listItem.innerHTML = `
-
-        <img src="${user.profile_image_url}" alt="${streamer} profile image" width="100" class="profile-image">
-        <a href="https://www.twitch.tv/${streamer}" target="_blank">${streamer}</a>
-         <div> ${user.description} </div>
-
-        `;
-        streamersList.appendChild(listItem);
-    } else {
-        console.log(`${streamer} user not found.`);     
-    }
+        getTwitchStream(streamer).then(streamData => {
+            if(streamData.data.length > 0) {
+                const stream = streamData.data[0];
+                console.log(`${streamer} is live! Title: ${stream.title}, Viewers: ${stream.viewer_count}`);
+                const listItem = document.createElement('li');  
+                listItem.classList.add('streamer-item', 'live');
+                listItem.innerHTML = `
+                <img src="${data.data[0].profile_image_url}" alt="${streamer} profile image" width="100" class="profile-image">
+                <div class="stream-info">
+                <a href="https://www.twitch.tv/${streamer}" target="_blank">${streamer}</a>
+                <p class='status-cols'>${stream.title}</p>   
+                </div>
+             `;
+               streamersList.appendChild(listItem);
+            } else {
+                console.log(`${streamer} is offline.`);
+                const listItem = document.createElement('li');  
+                listItem.classList.add('streamer-item', 'offline');
+                listItem.innerHTML = `
+                <img src="${data.data[0].profile_image_url}" alt="${streamer} profile image" width="100" class="profile-image">
+               <div class="stream-info">
+                <a href="https://www.twitch.tv/${streamer}" target="_blank">${streamer}</a>
+                <p class='status-cols'>Offline</p>
+                </div>
+             `;
+               streamersList.appendChild(listItem);
+            }
+        });  
+    } 
     });
 });
 
@@ -107,26 +119,28 @@ async function getTwitchStream(username) {
     return data;
 }
 
-streamers.forEach(streamer => {
-    getTwitchStream(streamer).then(data => {
-   // console.log('st',data.data);
-    if(data.data.length > 0) {
-        const stream = data.data[0]; 
-        
-        //console.log(`${streamer} is live!`); 
-        console.log(` descript: ${stream.description}`); 
-        const listItem = document.createElement('li');  
-        listItem.innerHTML = `<strong>${streamer}</strong> is live!<br>
-        Title: ${stream.title}<br>
-        Viewers: ${stream.viewer_count}<br>
-        <a href="https://www.twitch.tv/${streamer}" target="_blank"> Watch Now</a>`;
-        streamersList.appendChild(listItem);
-    } else {
-        console.log(`${streamer} is offline.`); 
-    }    
+//     getTwitchStream(streamer).then(data => {
     
-    });
+//             const user = data.data[0];  
+
+//     if(data.data.length > 0) {
+
+//         const stream = data.data[0]; 
+//         const listItem = document.createElement('li');  
+//         listItem.innerHTML = `<strong>${streamer}</strong> is live!<br>
+//         Title: ${stream.title}<br>
+//         Viewers: ${stream.viewer_count}<br>
+//         <img src="${stream.thumbnail_url.replace('{width}', '300').replace('{height}', '200')}" alt="Stream Thumbnail"><br>
+//         <a href="https://www.twitch.tv/${streamer}" target="_blank"> Watch Now</a>`;
+//        streamersList.appendChild(listItem);
+//     } else {
+       
+//         console.log(`${streamer} is offline.`); 
+
+//     }    
+    
+//     });
 
 
-});
+// });
 //getTwitchStream('freecodecamp').then(data => console.log(data));
