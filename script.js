@@ -1,6 +1,23 @@
 const streamersList = document.getElementById('streamers-list');
+const filterButtons = document.querySelectorAll('.selectors button');
+const first = document.getElementById('first');
 
+filterButtons.forEach(button => {
+    if(button === first) {
+        return ;
+    }else{
 
+        button.addEventListener('mouseenter', () => {
+           first.classList.remove('active');
+        });
+    }
+    button.addEventListener('mouseleave', () => {
+     const isAnyOneHoverd = Array.from(filterButtons).some(btn => btn !== first && btn.matches(':hover'));
+     if(!isAnyOneHoverd) {
+        first.classList.add('active');
+     }
+    })
+})
 
 const clientId = '0ffdqcfdnrensv15pjoqoqlc9ba46q';
 const clientSecret = 'jyjr5gv58j9vvyant85mbz11pq02td';
@@ -8,7 +25,7 @@ const grantType= 'client_credentials'
 
 const tokenUrl = `https://id.twitch.tv/oauth2/token?client_id=${clientId}&client_secret=${clientSecret}&grant_type=${grantType}`;
 
-// Function to get OAuth token
+
 const streamers = ['freecodecamp', 'ESL_SC2', 'OgamingSC2', 'cretetion', 'storbeck', 'habathcx', 'RobotCaleb', 'noobs2ninjas'];
 
 // const oauth2 = curl -X POST "https://id.twitch.tv/oauth2/token" \
@@ -29,33 +46,6 @@ const streamers = ['freecodecamp', 'ESL_SC2', 'OgamingSC2', 'cretetion', 'storbe
 // -H 'Client-Id:0ffdqcfdnrensv15pjoqoqlc9ba46q'
 
 
-
-// {"data":
-//     [{"id":"141981764",
-//         "login":"twitchdev",
-//         "display_name":"TwitchDev",
-//         "type":"",
-//         "broadcaster_type":"partner",
-//         "description":"Supporting third-party developers building Twitch integrations from chatbots to game integrations.",
-//         "profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/8a6381c7-d0c0-4576-b179-38bd5ce1d6af-profile_image-300x300.png",
-//         "offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/3f13ab61-ec78-4fe6-8481-8682cb3b0ac2-channel_offline_image-1920x1080.png",
-//         "view_count":0,
-//         "created_at":"2016-12-14T20:32:28Z"}]
-//     } 
-
-
-
-//     {"data":[{"id":"79776140",
-//         "login":"freecodecamp",
-//         "display_name":"FreeCodeCamp",
-//         "type":"",
-//         "broadcaster_type":"",
-//         "description":"Learn to code for free at freecodecamp.org",
-//         "profile_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-profile_image-d9514f2df0962329-300x300.png","offline_image_url":"https://static-cdn.jtvnw.net/jtv_user_pictures/freecodecamp-channel_offline_image-b8e133c78cd51cb0-1920x1080.png",
-//         "view_count":0,
-//         "created_at":"2015-01-14T03:36:47Z"}
-//     ],
-// }
 
  //get user info
 async function getTwitchUser(username) {
