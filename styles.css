@@ -5,14 +5,26 @@ body{
     flex-direction: column;
     align-items: center;
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #d2bac7;
+    background-color: #4A5C82;
+    background-color: #93ACDD;
     color: #333;
+
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     width: 90%;
+    margin:  100px auto;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
 }
 #streamers {
-  
     width: 100%;
     max-width: 600px;
    padding: 0;
+   margin-bottom: 20px;
 }
 #streamers-list{
     /* max-width: 600px; */
@@ -42,6 +54,7 @@ body{
 #all{
     padding: 0 18px;
     margin :5px 0;
+    cursor: pointer;
 }
 
 .selectors  {
@@ -63,6 +76,7 @@ body{
     transition: transform 0.4s ease;
     transform: translateX(50px);
     background-color: #f4f4f4;
+    cursor: pointer;
    
  }
 
@@ -72,6 +86,7 @@ body{
    transform: translateX(20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
     pointer-events: none;
+
     
  }
 
@@ -90,11 +105,13 @@ body{
  .selectors.active .circle{
     transform: scale(1.2);
     transform: translateX(-3px);
+    cursor: pointer;
 }
 .selectors.active button{
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
+    cursor: pointer;
 }   
 .selectors:hover .circle{
     /* transform: scale(1.2); */
@@ -105,7 +122,9 @@ body{
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;  
+    cursor: pointer;
 }
+
 
 #header{
     display: flex;
@@ -171,7 +190,7 @@ body{
    
     color: #93acdd;
     font-weight: bold;
-    background-color: #4A5D82;
+    background-color: #53617d;
      margin: 0  ;
 
 }

@@ -12,27 +12,35 @@ filterButtons.forEach(button => {
     }else{
         button.addEventListener('mouseenter', () => {
            first.classList.remove('active');
+              button.classList.add('active');
         });
     }
-    button.addEventListener('mouseleave', () => {
-     const isAnyOneHoverd = Array.from(filterButtons).some(btn => btn !== first && btn.matches(':hover'));
-     if(!isAnyOneHoverd) {
-        first.classList.add('active');
-        displayStreamers(copystreamersList);
-     }
-    })    
+    // button.addEventListener('mouseleave', () => {
+    //  const isAnyOneHoverd = Array.from(filterButtons).some(btn => btn !== first && btn.matches(':hover'));
+    //  if(!isAnyOneHoverd) {
+    //     first.classList.add('active');
+       
+    //  }
+    // })    
     button.addEventListener('click', () => {
          if(button.id === "all") {
+            first.classList.add('active');
                 streamersList.innerHTML = '';
               setTimeout(() => {
                 displayStreamers(copystreamersList);
               }, 300);
          }else if(button.id === "online-btn") {
+               first.classList.remove('active');
+                 button.classList.add('active');
+                 console.log('on',button);
                 streamersList.innerHTML = '';
              const filteredItems = copystreamersList.filter(item => item.classList.contains('live'));
              displayStreamers(filteredItems);
 
          }else if(button.id === "offline-btn") {
+                first.classList.remove('active');  
+                console.log('of',button); 
+                button.classList.add('active');
              streamersList.innerHTML = '';
            let offLine =  copystreamersList.filter(item => item.classList.contains('offline')) 
            displayStreamers(offLine);
