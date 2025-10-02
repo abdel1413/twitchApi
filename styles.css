@@ -226,3 +226,22 @@ ul{
 .stream-info a{
     width: 150px;
 }
+
+
+@media (max-width: 600px) {
+    #container {
+        width: 100%;
+        margin: 20px auto;
+    }
+    .stream-info {
+        flex-direction: column;
+    }
+    .status-cols {
+        margin: 5px 0;
+        width: 100%;
+    }
+    .stream-info a {
+        width: 100%;
+        text-align: center;
+    }
+}
